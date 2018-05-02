@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  aliasmanager:
+    image: aliasmanager
+    build:
+      context: .
+      dockerfile: AliasManager/Dockerfile
