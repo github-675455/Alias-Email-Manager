@@ -2,10 +2,10 @@ image : microsoft/dotnet:latest
 stages:
   - build
 before_script:
-  - 'dotnet restore'
+  - 'dotnet restore $CI_PROJECT_NAME'
 build:
  stage: build
  script:
-  - 'dotnet build'
+  - 'dotnet build $CI_PROJECT_NAME'
  only:
    - master
