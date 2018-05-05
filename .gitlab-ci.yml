@@ -2,10 +2,10 @@ image : microsoft/dotnet:latest
 stages:
   - build
 before_script:
-  - 'dotnet restore $CI_PROJECT_NAME'
+  - 'dotnet restore AliasManager'
 build:
  stage: build
  script:
-  - 'dotnet build $CI_PROJECT_NAME'
+  - 'dotnet build AliasManager'
  only:
    - master
