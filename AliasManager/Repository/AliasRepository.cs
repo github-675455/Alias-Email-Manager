@@ -12,6 +12,7 @@ namespace AliasManager.Repository
     public class AliasesRepository : IRepository<Aliases>
     {
         private string connectionString;
+
         public AliasesRepository(IConfiguration configuration)
         {
             connectionString = configuration.GetValue<string>("DBInfo:ConnectionString");
