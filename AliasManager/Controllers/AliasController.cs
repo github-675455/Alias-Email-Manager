@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using AliasManager.Models;
 using AliasManager.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AliasManager.Controllers
 {
