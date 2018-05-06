@@ -16,9 +16,6 @@ namespace AliasManager
 {
     public class Startup
     {
-        private const string SecretKey = "dRSDGBedflegokh3rtwfwef"; // todo: get this from somewhere secure
-        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +27,10 @@ namespace AliasManager
         public void ConfigureServices(IServiceCollection services)
         {
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
+
+            string SecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
+            SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+            
 
             // Configure JwtIssuerOptions
             services.Configure<JwtIssuerOptions>(options =>

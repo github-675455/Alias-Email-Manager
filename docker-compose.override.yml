@@ -4,5 +4,7 @@ services:
   aliasmanager:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - DATABASE_CONNECTION_STRING=User ID=mail_user;Password=groke305yo3owkdjvneDfmw1rGrg;Host=host.docker.internal;Port=5432;Database=mail;Pooling=true;
+      - JWT_SECRET_KEY=dRSDGBedflegokh3rtwfwefVfbfleoeNeowSwi30tkiBmwnbGei4rtikwSDfikerogprifEjwi3e9gjwwjQawq2rgfeiemvgE
     ports:
       - "80"

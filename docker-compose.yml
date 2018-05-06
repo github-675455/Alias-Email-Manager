@@ -1,8 +1,34 @@
 version: '3'
 
 services:
+
   aliasmanager:
     image: aliasmanager
+    hostname: api
     build:
-      context: .
-      dockerfile: AliasManager/Dockerfile
+        context: .
+        dockerfile: AliasManager/Dockerfile
+    networks:
+        - customnetwork
+    links:
+        - db
+    depends_on:
+        - db
+
+  db:
+    image: postgres
+    hostname: database
+    restart: always
+    volumes:
+        - pgdata:/var/lib/postgresql/data
+    networks:
+        - customnetwork
+    environment:
+        POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+volumes:
+  pgdata:
+
+networks:
+  customnetwork:
+    driver: bridge

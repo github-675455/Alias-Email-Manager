@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using AliasManager.Models;
+using System;
 
 namespace AliasManager.Repository
 {
@@ -15,7 +16,7 @@ namespace AliasManager.Repository
 
         public AliasesRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetValue<string>("DBInfo:ConnectionString");
+            connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
         }
 
         internal IDbConnection Connection
