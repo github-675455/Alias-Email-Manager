@@ -19,11 +19,15 @@ services:
     image: postgres
     hostname: database
     restart: always
+    build:
+        context: CustomPostgresql/
+        dockerfile: Dockerfile
     volumes:
         - pgdata:/var/lib/postgresql/data
     networks:
         - customnetwork
     environment:
+        POSTGRES_DB: postgres
         POSTGRES_PASSWORD: ${DB_PASSWORD}
 
 volumes:

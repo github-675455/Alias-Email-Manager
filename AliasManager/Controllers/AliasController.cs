@@ -18,13 +18,13 @@ namespace AliasManager.Controllers
             aliasesRepository = new AliasesRepository(configuration);
         }
 
-        [HttpGet]
+        [HttpGet("")]
         public IList<Aliases> Index()
         {
             return aliasesRepository.FindAll();
         }
         
-        [HttpPost]
+        [HttpPost("create")]
         public IActionResult Create([FromBody]Aliases alias)
         {
             if (!ModelState.IsValid)
@@ -33,7 +33,7 @@ namespace AliasManager.Controllers
             return Ok(aliasesRepository.Add(alias));
         }
         
-        [HttpPost]
+        [HttpPost("edit")]
         public IActionResult Edit([FromBody]Aliases alias)
         {
             if (!ModelState.IsValid)
@@ -44,7 +44,7 @@ namespace AliasManager.Controllers
             return Ok(alias);
         }
         
-        [HttpDelete]
+        [HttpDelete("delete")]
         public IActionResult Delete(int? id)
         {
             if (id == null)
