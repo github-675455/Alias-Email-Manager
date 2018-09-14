@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  aliasmanager:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DATABASE_CONNECTION_STRING=${DATABASE_CONNECTION_STRING}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    ports:
+      - ${PUBLIC_EXTERNAL_IP}:80:80/tcp
+  db:
+    environment:
+        POSTGRES_PASSWORD: ${DB_POSTGRES_PASSWORD}
+        POSTGRES_USER: postgres
+        DB_PASSWORD: ${DB_PASSWORD}
+  migrationdb:
+    environment:
+        DB_POSTGRES_PASSWORD: ${DB_POSTGRES_PASSWORD}
+        DB_PASSWORD: ${DB_PASSWORD}

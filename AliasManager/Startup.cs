@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using AliasManager.Model;
 
 namespace AliasManager
 {
@@ -67,6 +68,8 @@ namespace AliasManager
                 configureOptions.TokenValidationParameters = tokenValidationParameters;
                 configureOptions.SaveToken = true;
             });
+
+            services.AddIdentityCore<User>();
 
             // api user claim policy
             services.AddAuthorization(options =>

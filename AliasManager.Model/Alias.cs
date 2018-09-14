@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AliasManager.Models
+namespace AliasManager.Model
 {
     public class Aliases : BaseEntity
     {

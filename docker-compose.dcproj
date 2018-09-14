@@ -9,6 +9,8 @@
     <DockerServiceName>aliasmanager</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="CustomPostgresql\create.user.database.sh" />
+    <None Include="CustomPostgresql\Dockerfile" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>

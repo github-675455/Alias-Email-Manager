@@ -6,10 +6,24 @@ services:
     image: aliasmanager
     hostname: api
     build:
-        context: .
-        dockerfile: AliasManager/Dockerfile
+        context: AliasManager/
+        dockerfile: Dockerfile
     networks:
         - customnetwork
+    links:
+        - db
+    depends_on:
+        - db
+
+  aliasmanagermigration:
+    image: alias-manager-migration
+    build:
+      context: AliasManager.Repository.Migration/
+      dockerfile: Dockerfile
+    networks:
+        - customnetwork
+    environment:
+        DATABASE_CONNECTION_STRING: ${DATABASE_CONNECTION_STRING}
     links:
         - db
     depends_on:
@@ -19,11 +33,15 @@ services:
     image: postgres
     hostname: database
     restart: always
+    build:
+        context: CustomPostgresql/
+        dockerfile: Dockerfile
     volumes:
         - pgdata:/var/lib/postgresql/data
     networks:
         - customnetwork
     environment:
+        POSTGRES_DB: postgres
         POSTGRES_PASSWORD: ${DB_PASSWORD}
 
 volumes:

@@ -1,0 +1,1 @@
+﻿ALTER TABLE public.aliases OWNER TO mail_user;

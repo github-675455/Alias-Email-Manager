@@ -5,8 +5,8 @@ using NpgsqlTypes;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using AliasManager.Models;
 using System;
+using AliasManager.Model;
 
 namespace AliasManager.Repository
 {
@@ -62,6 +62,15 @@ namespace AliasManager.Repository
             {
                 dbConnection.Open();
                 return dbConnection.Query<Aliases>("SELECT * FROM aliases WHERE Id = @Id", new { Id = id }).FirstOrDefault();
+            }
+        }
+
+        public Aliases FindByAlias(String alias)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                return dbConnection.Query<Aliases>("SELECT * FROM aliases WHERE alias = @Alias", new { Alias = alias }).FirstOrDefault();
             }
         }
 

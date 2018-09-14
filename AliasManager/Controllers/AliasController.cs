@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
-using AliasManager.Models;
+using AliasManager.Model;
 using AliasManager.Repository;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AliasManager.Controllers
 {
@@ -18,33 +17,37 @@ namespace AliasManager.Controllers
             aliasesRepository = new AliasesRepository(configuration);
         }
 
-        [HttpGet]
+        [HttpGet("")]
         public IList<Aliases> Index()
         {
             return aliasesRepository.FindAll();
         }
         
-        [HttpPost]
+        [HttpPost("create")]
         public IActionResult Create([FromBody]Aliases alias)
         {
             if (!ModelState.IsValid)
-                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name.ToString()));
-            
+                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name));
+
+            var aliasEncontrado = aliasesRepository.FindByAlias(alias.Alias);
+
+
+
             return Ok(aliasesRepository.Add(alias));
         }
         
-        [HttpPost]
+        [HttpPost("edit")]
         public IActionResult Edit([FromBody]Aliases alias)
         {
             if (!ModelState.IsValid)
-                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name.ToString()));
+                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name));
 
             aliasesRepository.Update(alias);
 
             return Ok(alias);
         }
         
-        [HttpDelete]
+        [HttpDelete("delete")]
         public IActionResult Delete(int? id)
         {
             if (id == null)

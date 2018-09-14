@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using AliasManager.Models;
+﻿using AliasManager.Model;
+using System.Collections.Generic;
 
 namespace AliasManager.Repository
 {
