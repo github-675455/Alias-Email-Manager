@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
-using AliasManager.Models;
+using AliasManager.Model;
 using AliasManager.Repository;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AliasManager.Controllers
 {
@@ -28,8 +27,12 @@ namespace AliasManager.Controllers
         public IActionResult Create([FromBody]Aliases alias)
         {
             if (!ModelState.IsValid)
-                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name.ToString()));
-            
+                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name));
+
+            var aliasEncontrado = aliasesRepository.FindByAlias(alias.Alias);
+
+
+
             return Ok(aliasesRepository.Add(alias));
         }
         
@@ -37,7 +40,7 @@ namespace AliasManager.Controllers
         public IActionResult Edit([FromBody]Aliases alias)
         {
             if (!ModelState.IsValid)
-                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name.ToString()));
+                return Forbid(string.Format("{0} não é valido.", alias.GetType().Name));
 
             aliasesRepository.Update(alias);
 

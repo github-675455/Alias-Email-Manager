@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 
-namespace AliasManager.Models
+namespace AliasManager.Model
 {
     public class User : IdentityUser
     {
